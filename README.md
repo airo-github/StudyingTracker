@@ -1,25 +1,11 @@
 # README
 
 ## Times-app
-This README would normally document whatever steps are necessary to get the
-application up and running.
+勉強時間を計測するアプリです。
+以下の機能を有しています。
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+・ユーザ登録機能
+・ログイン機能
+・時間計測機能
+・学習時間確認機能
+・ログイン中のユーザ確認機能
