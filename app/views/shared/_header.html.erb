@@ -1,0 +1,43 @@
+<header>
+  <nav class="navbar navbar-expand-lg navigation navbar-light bg-light">
+
+    <%= link_to root_path, class: 'navbar-brand' do %>
+      <%= image_tag 'logo.png' %>
+    <% end %>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto main-nav align-items-center">
+        <li class="nav-item dropdown dropdown-slide">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= Board.model_name.human %>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right">
+            <%= link_to t('boards.index.title'), boards_path, class: 'dropdown-item' %>
+            <%= link_to t('boards.new.title'), new_board_path, class: 'dropdown-item' %>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'ブックマーク一覧', '#', class: 'nav-link' %>
+        </li>
+
+        <li class="nav-item dropdown dropdown-slide">
+          <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="header-profile">
+            <%= image_tag 'sample', size: '40x40', class: 'rounded-circle mr15'%>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <div class="dropdown-item"><%= "#{current_user.decorate.full_name}" %></div>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'プロフィール', '#', class: 'dropdown-item' %>
+
+            <%= link_to (t 'defaults.logout'), logout_path, class: 'dropdown-item', method: :delete %>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
