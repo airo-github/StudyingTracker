@@ -72,3 +72,8 @@ group :test do
 end
 
 gem "sorcery"
+gem "rails-i18n"
+gem 'carrierwave'
+gem 'font-awesome-sass', '5.15.1'
+gem 'draper'
+
