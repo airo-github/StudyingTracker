@@ -12,12 +12,9 @@
       <ul class="navbar-nav ml-auto main-nav align-items-center">
         <li class="nav-item dropdown dropdown-slide">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= Board.model_name.human %>
           </a>
 
           <div class="dropdown-menu dropdown-menu-right">
-            <%= link_to t('boards.index.title'), boards_path, class: 'dropdown-item' %>
-            <%= link_to t('boards.new.title'), new_board_path, class: 'dropdown-item' %>
           </div>
         </li>
 
@@ -30,7 +27,7 @@
             <%= image_tag 'sample', size: '40x40', class: 'rounded-circle mr15'%>
           </a>
           <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-item"><%= "#{current_user.decorate.full_name}" %></div>
+            <div class="dropdown-item"><%= "#{current_user.name}" %></div>
             <div class="dropdown-divider"></div>
             <%= link_to 'プロフィール', '#', class: 'dropdown-item' %>
 
