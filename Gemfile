@@ -76,4 +76,5 @@ gem "rails-i18n"
 gem 'carrierwave'
 gem 'font-awesome-sass', '5.15.1'
 gem 'draper'
-
+gem 'jquery-rails'
+gem 'cssbundling-rails'
