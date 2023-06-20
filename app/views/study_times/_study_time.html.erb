@@ -1,0 +1,11 @@
+<div class="col-sm-12 col-lg-4 mb-3">
+  <%= study_time.id %>
+  <%= l study_time.created_at, format: :long %>
+  <%= l study_time.updated_at, format: :long %>
+  <% if study_time.total_time.present? %>
+    <%= "#{study_time.total_time / 60}時間#{study_time.total_time % 60}分" %>
+  <% end %>
+  <%= form_for(study_time, url: study_time_path(study_time)) do |f| %>
+    <%= f.submit "終了" %>
+  <% end %>
+</div>

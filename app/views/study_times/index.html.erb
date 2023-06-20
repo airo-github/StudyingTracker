@@ -1,0 +1,16 @@
+<div class="container pt-3">
+   
+
+   <!-- 掲示板一覧 -->
+   <div class="row">
+     <div class="col-12">
+       <div class="row">
+         <% if @study_time.present? %>
+           <%= render @study_time %>
+         <% else %>
+           <p><%= t('.no_result') %></p>
+         <% end %>
+       </div>
+     </div>
+   </div>
+ </div>
