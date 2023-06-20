@@ -1,5 +1,6 @@
 <div class="col-sm-12 col-lg-4 mb-3">
-  <%= study_time.id %>
+<%= image_tag current_user.avatar.url(:resized), size: '40x40', class: 'rounded-circle mr15'%>
+  <%= study_time.user.name %>
   <%= l study_time.created_at, format: :long %>
   <%= l study_time.updated_at, format: :long %>
   <% if study_time.total_time.present? %>
