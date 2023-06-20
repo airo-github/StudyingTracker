@@ -9,6 +9,7 @@ ja:
       created: "%{item}を作成しました"
       not_created: "%{item}を作成できませんでした"
       updated: "更新しました"
+      not_updated: "更新できませんでした"
   users:
     new:
       title: "ユーザー登録"
@@ -26,14 +27,12 @@ ja:
       fail: "ログインに失敗しました"
     destroy:
       success: "ログアウトしました"
-  boards:
+  study_times:
     index:
-      title: "掲示板一覧"
-      no_result: "掲示板がありません"
+      title: "学習記録一覧"
+      no_result: "学習記録がありません"
     new:
-      title: "掲示板作成"
-    bookmarks:
-      title: "ブックマーク一覧"
+      title: "学習記録作成"
   profiles:
     show:
       title: "プロフィール"

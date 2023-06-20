@@ -1,11 +1,9 @@
 <div class="col-sm-12 col-lg-4 mb-3">
-<%= image_tag current_user.avatar.url(:resized), size: '40x40', class: 'rounded-circle mr15'%>
+  <%= image_tag current_user.avatar.url(:resized), size: '40x40', class: 'rounded-circle mr15'%>
   <%= study_time.user.name %>
   <%= l study_time.created_at, format: :long %>
   <%= l study_time.updated_at, format: :long %>
-  <% if study_time.total_time.present? %>
-    <%= "#{study_time.total_time / 60}時間#{study_time.total_time % 60}分" %>
-  <% end %>
+  <%= "#{study_time.total_time / 60}時間#{study_time.total_time % 60}分" %>
   <%= form_for(study_time, url: study_time_path(study_time)) do |f| %>
     <%= f.submit "終了" %>
   <% end %>
