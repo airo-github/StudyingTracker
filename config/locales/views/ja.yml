@@ -3,10 +3,12 @@ ja:
     login: "ログイン"
     register: "登録"
     logout: "ログアウト"
+    edit: '編集'
     message:
       require_login: "ログインしてください"
       created: "%{item}を作成しました"
       not_created: "%{item}を作成できませんでした"
+      updated: "更新しました"
   users:
     new:
       title: "ユーザー登録"
@@ -35,3 +37,5 @@ ja:
   profiles:
     show:
       title: "プロフィール"
+    edit:
+      title: 'プロフィール編集'
