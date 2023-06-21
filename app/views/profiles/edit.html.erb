@@ -15,12 +15,6 @@
         <%= f.file_field :avatar, onchange: 'previewFileWithId(preview)', class: 'form-control mb-3', accept: 'image/*' %>
         <%= f.hidden_field :avatar_cache %>
 
-        <div class='mt-3 mb-3'>
-          <%= image_tag @user.avatar.url,
-                        class: 'rounded-circle',
-                        id: 'preview',
-                        size: '100x100' %>
-        </div>
         <%= f.submit class: 'btn btn-primary' %>
       <% end %>
     </div>
