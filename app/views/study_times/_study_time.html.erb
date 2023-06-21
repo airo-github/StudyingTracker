@@ -1,6 +1,6 @@
 <div class="col-sm-12 col-lg-4 mb-3">
   <div class="flex flex-row">
-    <%= image_tag current_user.avatar.url(:resized), size: '40x40', class: 'rounded-circle mr15'%>
+    <%= image_tag study_time.user.avatar.url(:resized), size: '40x40', class: 'rounded-circle mr15'%>
     <%= study_time.user.name %>
   </div>
   <div class="flex flex-row">
@@ -16,7 +16,7 @@
   <%= "#{study_time.total_time / 60}時間#{study_time.total_time % 60}分" %>
   </div>
   <div class="flex flex-row">
-    <% if study_time.status != 1 %>
+    <% if current_user == study_time.user && study_time.status == 0 %>
       <%= form_with(model: study_time, url: study_time_path(study_time)) do |f| %>
         <%= f.submit "更新", class: "btn btn-primary" %>
       <% end %>
