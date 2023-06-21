@@ -13,7 +13,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @study_time = StudyTime.where(status: 1).order(created_at: :desc)
+    @study_time = StudyTime.where(user_id: current_user.id, status: 1).order(created_at: :desc)
     @total_time = StudyTime.where(user_id: current_user.id).sum(:total_time)
   end
 

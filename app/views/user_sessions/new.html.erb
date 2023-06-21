@@ -16,8 +16,9 @@
         </div>
       <% end %>
       <div class='text-center'>
-        <%= link_to (t '.to_register_page'), new_user_path %>
-        <a href="#"><%= t '.password_forget' %></a>
+        <%= link_to (t '.to_register_page'), new_user_path, class: 'btn btn-primary' %>
+        <%= link_to (t '.password_forget'), "#", class: 'btn btn-primary' %>
       </div>
     </div>
   </div>
+</div>
