@@ -4,7 +4,13 @@
   <%= l study_time.created_at, format: :long %>
   <%= l study_time.updated_at, format: :long %>
   <%= "#{study_time.total_time / 60}時間#{study_time.total_time % 60}分" %>
-  <%= form_for(study_time, url: study_time_path(study_time)) do |f| %>
+  <%= form_with(model: study_time, url: study_time_path(study_time)) do |f| %>
+    <%= f.submit "更新" %>
+  <% end %>
+
+  <%= form_with(model: study_time, url: finish_study_time_path(study_time)) do |f| %>
     <%= f.submit "終了" %>
   <% end %>
+
+
 </div>
