@@ -23,6 +23,14 @@ class StudyTimesController < ApplicationController
     redirect_to study_times_path
   end
 
+  def finish
+    @study_time = StudyTime.find(params[:id])
+    @study_time.status = 1
+    @study_time.save
+    redirect_to study_times_path
+  end
+
+
   private
 
   def study_time_params
