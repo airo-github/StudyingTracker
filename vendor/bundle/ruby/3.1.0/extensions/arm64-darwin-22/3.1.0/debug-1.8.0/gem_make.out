@@ -1,0 +1,16 @@
+current directory: /Users/ryoyaokuma/workspace/runteq/team_satoharu/vendor/bundle/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+/Users/ryoyaokuma/.rbenv/versions/3.1.3/bin/ruby -I /Users/ryoyaokuma/.rbenv/versions/3.1.3/lib/ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/ryoyaokuma/workspace/runteq/team_satoharu/vendor/bundle/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230620-55156-vtwccb sitelibdir\=./.gem.20230620-55156-vtwccb clean
+
+current directory: /Users/ryoyaokuma/workspace/runteq/team_satoharu/vendor/bundle/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230620-55156-vtwccb sitelibdir\=./.gem.20230620-55156-vtwccb
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.bundle
+
+current directory: /Users/ryoyaokuma/workspace/runteq/team_satoharu/vendor/bundle/ruby/3.1.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230620-55156-vtwccb sitelibdir\=./.gem.20230620-55156-vtwccb install
+/opt/homebrew/bin/ginstall -c -m 0755 debug.bundle ./.gem.20230620-55156-vtwccb/debug
