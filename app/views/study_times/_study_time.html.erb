@@ -1,16 +1,28 @@
 <div class="col-sm-12 col-lg-4 mb-3">
-  <%= image_tag current_user.avatar.url(:resized), size: '40x40', class: 'rounded-circle mr15'%>
-  <%= study_time.user.name %>
+  <div class="flex flex-row">
+    <%= image_tag current_user.avatar.url(:resized), size: '40x40', class: 'rounded-circle mr15'%>
+    <%= study_time.user.name %>
+  </div>
+  <div class="flex flex-row">
+  <p>開始時間</p>
   <%= l study_time.created_at, format: :long %>
+  </div>
+  <div class="flex flex-row">
+  <p>終了時間</p>
   <%= l study_time.updated_at, format: :long %>
+  </div>
+  <div class="flex flex-row">
+  <p>合計時間</p>
   <%= "#{study_time.total_time / 60}時間#{study_time.total_time % 60}分" %>
-  <%= form_with(model: study_time, url: study_time_path(study_time)) do |f| %>
-    <%= f.submit "更新" %>
-  <% end %>
-
-  <%= form_with(model: study_time, url: finish_study_time_path(study_time)) do |f| %>
-    <%= f.submit "終了" %>
-  <% end %>
-
-
+  </div>
+  <div class="flex flex-row">
+    <% if study_time.status != 1 %>
+      <%= form_with(model: study_time, url: study_time_path(study_time)) do |f| %>
+        <%= f.submit "更新", class: "btn btn-primary" %>
+      <% end %>
+      <%= form_with(model: study_time, url: finish_study_time_path(study_time)) do |f| %>
+        <%= f.submit "終了", class: "btn btn-secondary" %>
+      <% end %>
+    <% end %>
+  </div>
 </div>

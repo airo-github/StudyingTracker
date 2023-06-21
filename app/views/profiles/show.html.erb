@@ -17,7 +17,17 @@
           <th scope="row"><%= t(User.human_attribute_name(:avatar)) %></th>
           <td><%= image_tag current_user.avatar.url, class: 'rounded-circle', size: '50x50' %></td>
         </tr>
+        <tr>
+          <th scope="row">合計勉強時間: <%= @total_time %> 分</th>
+        </tr>
       </table>
+      <tr>
+          <% if @study_time.present? %>
+            <%= render @study_time %>
+          <% else %>
+            <p><%= t('.no_result') %></p>
+          <% end %>
+        </tr>
     </div>
   </div>
 </div>
