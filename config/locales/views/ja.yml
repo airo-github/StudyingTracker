@@ -29,10 +29,10 @@ ja:
       success: "ログアウトしました"
   study_times:
     index:
-      title: "学習記録一覧"
-      no_result: "学習記録がありません"
+      title: "勉強中の皆さま"
+      no_result: "勉強中の人はいません"
     new:
-      title: "学習記録作成"
+      title: "勉強開始"
   profiles:
     show:
       title: "プロフィール"
