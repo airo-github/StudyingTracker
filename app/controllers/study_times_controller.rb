@@ -25,6 +25,9 @@ class StudyTimesController < ApplicationController
 
   def finish
     @study_time = StudyTime.find(params[:id])
+    elapsed_time = (Time.now - @study_time.created_at) / 60
+    @study_time.total_time = elapsed_time.to_i
+    @study_time.touch(:updated_at)
     @study_time.status = 1
     @study_time.save
     redirect_to study_times_path
