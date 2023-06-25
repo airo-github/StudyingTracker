@@ -79,3 +79,13 @@ gem 'draper'
 gem 'jquery-rails'
 gem 'cssbundling-rails'
 gem 'jsbundling-rails'
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
+
+gem "pg", "~> 1.5"
+
+gem "redis", "~> 5.0"
+gem 'dotenv-rails'
+gem 'fog-aws'
+gem 'carrierwave-aws'
+gem 'aws-sdk-s3', require: false
