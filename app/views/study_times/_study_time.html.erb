@@ -24,5 +24,8 @@
         <%= f.submit "終了", class: "btn btn-secondary" %>
       <% end %>
     <% end %>
+    <% if current_user == study_time.user && study_time.status == 1 %>
+      <%= button_to t('study_times.destroy'), study_time_path(study_time), class: "btn btn-secondary", method: :delete, "data-confirm" => t('defaults.message.destroy_confirm') %>
+    <% end %>
   </div>
 </div>
