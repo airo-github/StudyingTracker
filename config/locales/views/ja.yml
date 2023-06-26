@@ -37,6 +37,7 @@ ja:
       no_result: "勉強中の人はいません"
     new:
       title: "勉強開始"
+    destroy: "削除"
   profiles:
     show:
       title: "プロフィール"

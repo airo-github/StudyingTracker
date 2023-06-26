@@ -33,6 +33,11 @@ class StudyTimesController < ApplicationController
     redirect_to study_times_path
   end
 
+  def destroy
+    @study_time = StudyTime.find(params[:id])
+    @study_time.destroy
+    redirect_to profile_path
+  end
 
   private
 
