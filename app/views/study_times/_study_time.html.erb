@@ -8,7 +8,11 @@
   <%= l study_time.created_at, format: :long %>
   </div>
   <div class="flex flex-row">
-  <p>終了時間</p>
+  <% if study_time.status == 0 %>
+    <p> 更新時間 </p>
+  <% else %>
+    <p>終了時間</p>
+  <% end %>
   <%= l study_time.updated_at, format: :long %>
   </div>
   <div class="flex flex-row">
