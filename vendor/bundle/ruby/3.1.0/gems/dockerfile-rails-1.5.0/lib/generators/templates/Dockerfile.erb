@@ -1,0 +1,271 @@
+# syntax = docker/dockerfile:1
+
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+ARG RUBY_VERSION=<%= RUBY_VERSION %>
+<% if api_client_dir -%>
+<%= render partial: 'node_client' %>
+
+
+<% end -%>
+<% if options.fullstaq -%>
+FROM <%= platform %>quay.io/evl.ms/fullstaq-ruby:${RUBY_VERSION}-<%= options.jemalloc ? 'jemalloc-' : '' %><%= options.variant %><% unless options.precompile == "defer" %> as base<% end %>
+<% else -%>
+FROM <%= platform %><%= options.registry %>ruby:$RUBY_VERSION-<%= options.variant %><% unless options.precompile == "defer" %> as base<% end %>
+<% end -%>
+
+<% unless options.label.empty? -%>
+<% options.label.each do |key, value| -%>
+LABEL <%= key =~ /^\w[.\w]*$/ ? key : key.inspect %>=<%= value.inspect %>
+<% end -%>
+
+<% end -%>
+# Rails app lives here
+WORKDIR /rails
+
+<% unless base_args.empty? -%>
+# Base build arguments
+ARG <%= base_args.map {|key, value| "#{key}=#{value.inspect}"}.join(" \\\n    ") %>
+
+<% end -%>
+# Set production environment
+ENV <%= base_env.join(" \\\n    ") %>
+
+# Update gems and bundler
+RUN gem update --system --no-document && \
+    gem install -N <%= base_gems.join(" ") %>
+
+<% unless base_requirements.empty? -%>
+# Install packages needed to install <%= base_requirements %>
+<%= render partial: 'apt_install', locals: {packages: base_packages, clean: true, repos: base_repos} %>
+
+<% end -%>
+<% if using_execjs? -%>
+<%= render partial: 'install_node', locals: {yarn_version: nil} %>
+
+<% end -%>
+<% if base_instructions -%>
+<%= base_instructions %>
+
+<% end -%>
+<% unless options.precompile == "defer" -%>
+
+# Throw-away build stage<%= parallel? ? 's' : '' %> to reduce size of final image
+FROM base as <%= parallel? ? 'pre' : '' %>build
+
+<% end -%>
+# Install packages needed to build gems<%= using_node? ? " and node modules" : "" %>
+<%= render partial: 'apt_install', locals: {packages: build_packages, clean: false, repos: ''} %>
+
+<% if parallel? -%>
+
+FROM prebuild as node
+
+<% end -%>
+<% if using_node? and (!using_execjs? || File.exist?('yarn.lock')) -%>
+<%= render partial: 'install_node', locals: {node_version: using_execjs? ? nil : node_version, yarn_version: File.exist?('yarn.lock') ? yarn_version : nil} %>
+
+<% end -%>
+<% if parallel? -%>
+<%= render partial: 'npm_install', locals: {sources: %w(package.json yarn.lock)} %>
+
+
+FROM prebuild as build
+
+<% end -%>
+<% unless build_args.empty? -%>
+# Build arguments
+ARG <%= build_args.map {|key, value| "#{key}=#{value.inspect}"}.join(" \\\n    ") %>
+
+<% end -%>
+<% unless build_env.empty? -%>
+# Build options
+ENV <%= build_env.join(" \\\n    ") %>
+
+<% end -%>
+# Install application gems
+COPY<% if options.link? %> --link<% end %> Gemfile Gemfile.lock ./
+<% if options.cache? -%>
+RUN --mount=type=cache,id=bld-gem-cache,sharing=locked,target=/srv/vendor \
+    bundle config set app_config .bundle && \
+    bundle config set path /srv/vendor && \
+    bundle install && \
+<% if depend_on_bootsnap? -%>
+    bundle exec bootsnap precompile --gemfile && \
+<% end -%>
+    bundle clean && \
+    mkdir -p vendor && \
+    bundle config set path vendor && \
+    cp -ar /srv/vendor .
+
+<% else -%>
+RUN bundle install<% if depend_on_bootsnap? -%> && \
+    bundle exec bootsnap precompile --gemfile<% end %> && \
+    rm -rf ~/.bundle/ $BUNDLE_PATH/ruby/*/cache $BUNDLE_PATH/ruby/*/bundler/gems/*/.git
+
+<% end -%>
+<% if using_passenger? -%>
+# Compile passenger native support
+RUN passenger-config build-native-support
+
+<% end -%>
+<% if parallel? -%>
+# Copy node modules
+COPY --from=node /rails/node_modules /rails/node_modules
+COPY --from=node /usr/local/node /usr/local/node
+ENV PATH=/usr/local/node/bin:$PATH
+
+<% elsif using_node? -%>
+<%= render partial: 'npm_install', locals: {sources: Dir[*%w(package.json package-lock.json yarn.lock)]} %>
+
+<% end -%>
+# Copy application code
+COPY<% if options.link? %> --link<% end %> . .
+
+<% if build_instructions -%>
+<%= build_instructions %>
+
+<% end -%>
+<% if depend_on_bootsnap? -%>
+# Precompile bootsnap code for faster boot times
+RUN bundle exec bootsnap precompile app/ lib/
+
+<% end -%>
+<% unless binfile_fixups.empty? -%>
+<% if options['bin-cd'] and binfile_fixups.length == 1 -%>
+# Adjust binfiles to set current working directory
+<% else -%>
+# Adjust binfiles to be executable on Linux<%= options['bin-cd'] ? ' and set current working directory' : '' %>
+<% end -%>
+<%= "RUN " + binfile_fixups.join(" && \\\n    ") %>
+
+<% end -%>
+<% unless options.precompile == "defer" -%>
+<% if Dir.exist?('app/assets') and !api_only? -%>
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+RUN SECRET_KEY_BASE<%= Rails::VERSION::MAJOR<7 || Rails::VERSION::STRING.start_with?('7.0') ? '=DUMMY' : '_DUMMY=1' %> ./bin/rails assets:precompile
+
+<% end -%>
+
+# Final stage for app image
+FROM base
+
+<% end -%>
+<% if using_litefs? -%>
+# Install, configure litefs
+COPY --from=flyio/litefs:0.4.0 /usr/local/bin/litefs /usr/local/bin/litefs
+COPY<% if options.link? %> --link<% end %> config/litefs.yml /etc/litefs.yml
+
+<% end -%>
+<% unless deploy_args.empty? -%>
+# Deployment build arguments
+ARG <%= deploy_args.map {|key, value| "#{key}=#{value.inspect}"}.join(" \\\n    ") %>
+
+<% end -%>
+<% unless deploy_packages.empty? -%>
+# Install packages needed for deployment
+<%= render partial: 'apt_install', locals: {packages: deploy_packages, clean: true, repos: deploy_repos} %>
+<% end -%>
+
+<% if using_passenger? -%>
+<%= render partial: 'passenger' %>
+
+<% elsif options.nginx? -%>
+<%= render partial: 'nginx' %>
+
+<% elsif procfile.size > 1 -%>
+RUN gem install foreman
+
+<% end -%>
+<% unless options.precompile == "defer" -%>
+# Copy built artifacts: gems, application
+COPY --from=build /usr/local/bundle /usr/local/bundle
+COPY --from=build /rails /rails
+<% if using_passenger? -%>
+
+# Copy passenger native support
+COPY --from=build /root/.passenger/native_support /root/.passenger/native_support
+<% end -%>
+<% if api_client_dir -%>
+
+# Copy built client
+COPY --from=client /rails/<%= api_client_dir %>/build /rails/public
+<% end -%>
+
+<% end -%>
+<% if run_as_root? -%>
+<% if deploy_database == 'sqlite3' -%>
+RUN mkdir /data
+<% end -%>
+<% else -%>
+# Run and own only the runtime files as a non-root user for security
+<% if options.compose? -%>
+ARG UID=1000 \
+    GID=1000
+RUN groupadd -f -g $GID rails && \
+    useradd -u $UID -g $GID rails --create-home --shell /bin/bash && \
+<% else -%>
+RUN useradd rails --create-home --shell /bin/bash && \
+<% end -%>
+<% if options.nginx? -%>
+    chown rails:rails /var/lib/nginx /var/log/nginx/* && \
+<% end -%>
+<% if deploy_packages.include?("sudo") && options.sudo? -%>
+    sed -i 's/env_reset/env_keep="*"/' /etc/sudoers && \
+<% end -%>
+<% if deploy_database == 'sqlite3' -%>
+    mkdir /data<% if using_litefs? %> /litefs<% end %> && \
+    chown -R rails:rails <%= Dir[*%w(db log storage tmp)].join(" ") %> /data<% if using_litefs? %> /litefs<% end %>
+<% else -%>
+    chown -R rails:rails <%= Dir[*%w(db log storage tmp)].join(" ") %>
+<% end -%>
+<% unless options.swap? or using_passenger? or using_litefs? -%>
+USER rails:rails
+<% end -%>
+
+<% end -%>
+<% if deploy_instructions -%>
+<%= deploy_instructions.strip %>
+
+<% end -%>
+<% if using_litefs? and !run_as_root? -%>
+# Authorize rails user to launch litefs
+COPY <<-"EOF" /etc/sudoers.d/rails
+rails ALL=(root) /usr/local/bin/litefs
+EOF
+
+<% end -%>
+<% unless deploy_env.empty? -%>
+# Deployment options
+ENV <%= deploy_env.join(" \\\n    ") %>
+
+<% end -%>
+<% if options.prepare -%>
+# Entrypoint prepares the database.
+<% else -%>
+# Entrypoint sets up the container.
+<% end -%>
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+
+<% if procfile.size > 1 -%>
+# Build a Procfile for production use
+COPY <<-"EOF" /rails/Procfile.prod
+<% procfile.each do |name, command| -%>
+<%= name %>: <%= command %>
+<% end -%>
+EOF
+
+<% end -%>
+# Start the server by default, this can be overwritten at runtime
+EXPOSE 3000
+<% if deploy_database == 'sqlite3' -%>
+VOLUME /data
+<% end -%>
+<% unless fly_processes -%>
+<% if !options.procfile.blank? -%>
+CMD ["foreman", "start", "--procfile=<%= options.procfile %>"]
+<% elsif procfile.size > 1 -%>
+CMD ["foreman", "start", "--procfile=Procfile.prod"]
+<% else -%>
+CMD <%= procfile.values.first.split(" ").inspect %>
+<% end -%>
+<% end -%>
