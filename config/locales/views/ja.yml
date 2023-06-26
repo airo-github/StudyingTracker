@@ -1,15 +1,18 @@
 ja:
   defaults:
     login: "ログイン"
+    loginpage: "ログインページへ"
     register: "登録"
     logout: "ログアウト"
     edit: '編集'
+    destroy: '削除'
     message:
       require_login: "ログインしてください"
       created: "%{item}を作成しました"
       not_created: "%{item}を作成できませんでした"
       updated: "更新しました"
       not_updated: "更新できませんでした"
+      destroy_confirm: '本当に退会しますか？'
   users:
     new:
       title: "ユーザー登録"
@@ -17,6 +20,7 @@ ja:
     create:
       success: "ユーザー登録が完了しました"
       fail: "ユーザー登録に失敗しました"
+    destroy: "ユーザー削除"
   user_sessions:
     new:
       title: "ログイン"
@@ -29,10 +33,11 @@ ja:
       success: "ログアウトしました"
   study_times:
     index:
-      title: "学習記録一覧"
-      no_result: "学習記録がありません"
+      title: "勉強中の皆さま"
+      no_result: "勉強中の人はいません"
     new:
-      title: "学習記録作成"
+      title: "勉強開始"
+    destroy: "削除"
   profiles:
     show:
       title: "プロフィール"

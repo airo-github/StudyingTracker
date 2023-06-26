@@ -22,12 +22,17 @@
         </tr>
       </table>
       <tr>
-          <% if @study_time.present? %>
-            <%= render @study_time %>
-          <% else %>
-            <p><%= t('.no_result') %></p>
-          <% end %>
-        </tr>
+        <% if @study_time.present? %>
+          <%= render @study_time %>
+        <% else %>
+          <p><%= t('.no_result') %></p>
+        <% end %>
+      </tr>
+      <tr>
+        <%= button_to t('users.destroy'), user_path(current_user.id), class: 'btn btn-success float-right', method: :delete, "data-confirm" => t('defaults.message.destroy_confirm') %>
+      </tr>
+      <br>
+      <br>
     </div>
   </div>
 </div>
