@@ -1,18 +1,18 @@
-<div data-theme="retro">
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <div class="float-right">
-      <div class="flex flex-nowrap">
-        <div><%= image_tag current_user.avatar.url(:resized), size: '40x40', class: 'rounded-circle mr15'%></div>
-        <div></div><%= "#{current_user.name}" %></div>
-      </div>
-      <div class="flex flex-nowrap">
-        <div><%= link_to (t 'profiles.show.title'), profile_path, class: 'btn btn-accent' %></div>
-        <div><%= button_to (t 'defaults.logout'), logout_path, class: 'btn btn-accent', method: :delete %></div>
-      </div>
-      <div class="flex flex-nowrap">
-        <div><%= link_to (t 'study_times.new.title'), new_study_time_path, class: 'btn btn-accent' %></div>
-        <div><%= link_to (t 'study_times.index.title'), study_times_path, class: 'btn btn-accent' %></div>
-      </div>
+<header data-theme="retro">
+  <nav class="navbar navbar-expand-lg navigation navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto main-nav align-items-center d-flex">
+        <%= link_to "Studying Tracker", root_path, class: 'btn btn-accent' %>   
+      </ul>
+      <ul class="navbar-nav ml-auto main-nav align-items-center d-flex">
+        <%= image_tag current_user.avatar.url(:resized), size: '40x40', class: 'rounded-circle mr15'%>
+        <%= "#{current_user.name}" %>
+        <%= link_to (t 'study_times.new.title'), new_study_time_path, class: 'btn btn-accent' %>
+        <%= link_to (t 'study_times.index.title'), study_times_path, class: 'btn btn-accent' %>
+        <%= link_to (t 'profiles.show.title'), profile_path, class: 'btn btn-accent' %>
+        <%= button_to (t 'defaults.logout'), logout_path, class: 'btn btn-accent', method: :delete %>
+      </ul>
     </div>
-  </div>
-</div>
+  </nav>
+</header>
+
