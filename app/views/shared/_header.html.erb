@@ -1,6 +1,8 @@
 <header data-theme="retro", class= "py-8">
   <div class="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
-    <%= link_to "Studying Tracker", root_path, class: "btn text-5xl" %>
+    <div class="font-title">
+      <%= link_to "Studying Tracker", root_path, class: "btn text-5xl" %>
+    </div>
     <div class="font-yomogi md:ml-auto flex flex-wrap items-center text-base md:text-xl justify-center">
       <%= link_to (t 'study_times.new.title'), new_study_time_path, class: "btn mr-5 hover:text-yellow-700"%>
       <%= link_to (t 'study_times.index.title'), study_times_path, class: "btn mr-5 hover:text-yellow-700"%>
