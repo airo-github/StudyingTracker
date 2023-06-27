@@ -1,11 +1,10 @@
-<header data-theme="retro">
-  <nav class="navbar navbar-expand-lg navigation navbar-light bg-light">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="navbar-nav ml-auto main-nav align-items-center">
-        <div class="nav-item">
-          <%= link_to (t 'defaults.loginpage'), login_path ,class: 'btn btn-accent' %>
-        </div>
-      </div>
+<header data-theme="retro", class= "py-20">
+  <div class="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
+    <div class="font-title">
+      <%= link_to "Studying Tracker", root_path, class: "btn text-5xl" %>
     </div>
-  </nav>
+    <div class="font-top md:ml-auto flex flex-wrap items-center text-base md:text-xl justify-center">
+      <%= link_to (t 'defaults.loginpage'), login_path, class: "btn mr-5"%>
+    </div>
+  </div>
 </header>
