@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_21_074846) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_28_115556) do
   create_table "study_times", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "total_time", default: 0
@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_21_074846) do
     t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
