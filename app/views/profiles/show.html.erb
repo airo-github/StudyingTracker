@@ -13,7 +13,13 @@
     </tr>
     <tr>
       <th scope="row"><%= t(User.human_attribute_name(:avatar)) %></th>
-      <td><%= image_tag current_user.avatar.url, class: 'rounded-circle', size: '50x50' %></td>
+      <td>
+        <div class="avatar">
+          <div class="w-16 rounded-full">
+            <%= image_tag current_user.avatar.url %>
+          </div>
+        </div>
+      </td>
     </tr>
     <tr>
       <th scope="row">合計勉強時間:  <%= "#{@total_time / 60}時間#{@total_time % 60}分" %></th>
