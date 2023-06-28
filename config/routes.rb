@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   get 'service', to: 'static_pages#service'
   resources :users, only: %i[new create destroy]
   resource :profile, only: %i[show edit update]
-  resource :aaa, only: %i[show edit update]
   resources :study_times, only: %i[new create index update destroy] do
     member do
       patch :finish
