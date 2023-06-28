@@ -17,6 +17,7 @@ module.exports = {
       colors: {
         'maincolor': '#5c4d33',
         'headfoot': '#482f14',
+        'twitter': '	#FFFFFF',
       },
     },
   },
