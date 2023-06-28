@@ -1,7 +1,11 @@
 class StudyTimesController < ApplicationController
 
   def new
-    @study_time = StudyTime.new
+    if current_user.study_times.exists?(status: 0)
+      redirect_to study_times_path, alert: t('defaults.message.already_have_study_time')
+    else
+      @study_time = StudyTime.new
+    end
   end
 
   def create
@@ -30,7 +34,7 @@ class StudyTimesController < ApplicationController
     @study_time.touch(:updated_at)
     @study_time.status = 1
     @study_time.save
-    redirect_to study_times_path
+    redirect_to profile_path
   end
 
   def destroy

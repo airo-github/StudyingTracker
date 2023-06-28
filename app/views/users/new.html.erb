@@ -25,10 +25,10 @@
           <%= f.file_field :avatar, onchange: 'previewImage()', class: 'form-control mb-3', accept: 'image/*' %>
           <%= f.hidden_field :avatar_cache %>
         </div>
-        <%= f.submit (t 'defaults.register'), class: 'btn btn-primary' %>
+        <%= f.submit (t 'defaults.register'), class: 'btn btn-primary text-headfoot' %>
       <% end %>
       <div class='text-center'>
-        <%= link_to (t '.to_login_page'), login_path %>
+        <%= link_to (t '.to_login_page'), login_path, class: 'btn btn-primary text-headfoot' %>
       </div>
     </div>
   </div>

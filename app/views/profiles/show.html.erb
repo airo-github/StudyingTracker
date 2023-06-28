@@ -1,38 +1,40 @@
 <% content_for(:title, t('.title')) %>
-<div class="container pt-3">
-  <div class="row">
-    <div class="col-md-10 offset-md-1">
-      <h1 class="float-left mb-5"><%= t('.title') %></h1>
-      <%= link_to t('defaults.edit'), edit_profile_path, class: 'btn btn-success float-right' %>
-      <table class="table">
-        <tr>
-          <th scope="row"><%= t(User.human_attribute_name(:email)) %></th>
-          <td><%= current_user.email %></td>
-        </tr>
-        <tr>
-          <th scope="row"><%= t(User.human_attribute_name(:name)) %></th>
-          <td><%= current_user.name %></td>
-        </tr>
-        <tr>
-          <th scope="row"><%= t(User.human_attribute_name(:avatar)) %></th>
-          <td><%= image_tag current_user.avatar.url, class: 'rounded-circle', size: '50x50' %></td>
-        </tr>
-        <tr>
-          <th scope="row">合計勉強時間:  <%= "#{@total_time / 60}時間#{@total_time % 60}分" %></th>
-        </tr>
-      </table>
-      <tr>
-        <% if @study_time.present? %>
-          <%= render @study_time %>
-        <% else %>
-          <p><%= t('.no_result') %></p>
-        <% end %>
-      </tr>
-      <tr>
-        <%= button_to t('users.destroy'), user_path(current_user.id), class: 'btn btn-success float-right', method: :delete, "data-confirm" => t('defaults.message.destroy_confirm') %>
-      </tr>
-      <br>
-      <br>
+<div class="col-md-10 offset-md-1">
+  <h1 class="float-left mb-5"><%= t('.title') %></h1>
+  <%= link_to t('defaults.edit'), edit_profile_path, class: 'btn btn-success float-right text-headfoot' %>
+  <table class="table">
+    <tr>
+      <th scope="row"><%= t(User.human_attribute_name(:email)) %></th>
+      <td><%= current_user.email %></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= t(User.human_attribute_name(:name)) %></th>
+      <td><%= current_user.name %></td>
+    </tr>
+    <tr>
+      <th scope="row"><%= t(User.human_attribute_name(:avatar)) %></th>
+      <td><%= image_tag current_user.avatar.url, class: 'rounded-circle', size: '50x50' %></td>
+    </tr>
+    <tr>
+      <th scope="row">合計勉強時間:  <%= "#{@total_time / 60}時間#{@total_time % 60}分" %></th>
+    </tr>
+  </table>
+  <div class="container px-5 py-20 mx-auto">
+    <div class="flex flex-col text-center w-full mb-20">
+      <% if @study_time.present? %>
+        <div class="text-3xl font-top mb-4"><%= "学習記録" %></div>
+          <div class="flex flex-wrap -m-2">
+            <%= render @study_time %>
+          </div>
+        </div>
+      <% else %>
+        <div class="flex flex-col text-center w-full mb-20">
+          <div class="text-3xl font-top mb-4"><%= "学習記録がありません" %></div>
+        </div>
+      <% end %>
     </div>
+    <%= button_to t('users.destroy'), user_path(current_user.id), class: 'btn btn-secondary float-right text-headfoot', method: :delete, "data-confirm" => t('defaults.message.destroy_confirm') %>
+    <br>
+    <br>
   </div>
 </div>

@@ -13,6 +13,7 @@ ja:
       updated: "更新しました"
       not_updated: "更新できませんでした"
       destroy_confirm: '本当に退会しますか？'
+      already_have_study_time: "もうすでに学習を開始しています"
   users:
     new:
       title: "ユーザー登録"
@@ -43,3 +44,6 @@ ja:
       title: "プロフィール"
     edit:
       title: 'プロフィール編集'
+  policy:
+    privacy_policy: 'プライバシーポリシー'
+    terms_of_service: '利用規約'

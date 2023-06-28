@@ -12,12 +12,11 @@
           <%= f.password_field :password, class: 'form-control' %>
         </div>
         <div class="actions">
-          <%= f.submit (t 'defaults.login'), class: 'btn btn-primary' %>
+          <%= f.submit (t 'defaults.login'), class: 'btn btn-primary text-headfoot' %>
         </div>
       <% end %>
       <div class='text-center'>
-        <%= link_to (t '.to_register_page'), new_user_path, class: 'btn btn-primary' %>
-        <%= link_to (t '.password_forget'), "#", class: 'btn btn-primary' %>
+        <%= link_to (t '.to_register_page'), new_user_path, class: 'btn btn-primary text-headfoot' %>
       </div>
     </div>
   </div>
