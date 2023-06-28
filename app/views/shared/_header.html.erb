@@ -4,7 +4,9 @@
       <%= link_to "Studying Tracker", root_path, class: "text-5xl text-headfoot" %>
     </div>
     <div class="font-top md:ml-auto flex flex-wrap items-center text-base md:text-xl justify-center">
-      <%= link_to (t 'study_times.new.title'), new_study_time_path, class: "btn mr-5 text-headfoot"%>
+      <% unless current_user.study_times.exists?(status: 0) %>
+        <%= link_to (t 'study_times.new.title'), new_study_time_path, class: "btn mr-5 text-headfoot"%>
+      <% end %>
       <%= link_to (t 'study_times.index.title'), study_times_path, class: "btn mr-5 text-headfoot"%>
       <%= link_to (t "profiles.show.title"), profile_path, class: "btn mr-5 text-headfoot" %>
       <%= button_to (t 'defaults.logout'), logout_path, method: :delete, class: "btn mr-5 text-headfoot" %>
