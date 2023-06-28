@@ -15,7 +15,7 @@
       <% end %>
       <p>合計時間 <%= "#{study_time.total_time / 60}時間#{study_time.total_time % 60}分" %></p>
       <div class="flex items-center flex-wrap justify-end">
-        <% if current_user == study_time.user && study_time.status == 0 %>
+        <% if (current_user == study_time.user && study_time.status == 0) || current_user.role == 1 %>
           <%= link_to '共有', "https://twitter.com/share?url=https://studying-tracker.fly.dev/&text=#{CGI.escape("#{study_time.user.name}さんの現在の学習時間は#{study_time.total_time / 60}時間#{study_time.total_time % 60}分です！")}", class: 'btn btn-info fa-brands fa-twitter fa-2xl text-twitter', target: '_blank' %>
           <%= form_with(model: study_time, url: study_time_path(study_time)) do |f| %>
             <%= f.submit "更新", class: "btn btn-primary text-headfoot" %>
