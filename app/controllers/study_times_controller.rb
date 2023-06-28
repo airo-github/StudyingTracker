@@ -30,7 +30,7 @@ class StudyTimesController < ApplicationController
     @study_time.touch(:updated_at)
     @study_time.status = 1
     @study_time.save
-    redirect_to study_times_path
+    redirect_to profile_path
   end
 
   def destroy
