@@ -43,3 +43,6 @@ ja:
       title: "プロフィール"
     edit:
       title: 'プロフィール編集'
+  policy:
+    privacy_policy: 'プライバシーポリシー'
+    terms_of_service: '利用規約'
