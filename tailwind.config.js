@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
   content: [
     './app/views/**/*.html.erb',
@@ -11,8 +13,12 @@ module.exports = {
       fontFamily: {
         title: ['Emblema One', 'cursive'],
         top: ['Kosugi Maru', 'sans-serif'],
-      }
-    }
+      },
+      colors: {
+        'maincolor': '#5c4d33',
+        'headfoot': '#482f14',
+      },
+    },
   },
 
   plugins: [require("daisyui")],
