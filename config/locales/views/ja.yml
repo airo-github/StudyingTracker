@@ -34,14 +34,26 @@ ja:
       success: "ログアウトしました"
   study_times:
     index:
-      title: "勉強中の皆さま"
-      no_result: "勉強中の人はいません"
+      title: "学習中の皆さま"
+      no_result: "学習中の人はいません"
+      start: "学習開始ツイート"
+      start_time: "開始時間"
     new:
-      title: "勉強開始"
+      title: "学習開始"
+      start: "学習を開始する"
     destroy: "削除"
+    end_time: "終了時間"
+    tweet: "共有"
+    update: "更新"
+    end: "終了"
   profiles:
     show:
       title: "プロフィール"
+      total_time: "合計学習時間"
+      hour: "時間"
+      minute: "分"
+      study_times: "学習記録"
+      no_result: "学習記録がありません"
     edit:
       title: 'プロフィール編集'
   policy:
