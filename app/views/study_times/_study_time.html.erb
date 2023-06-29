@@ -7,25 +7,25 @@
     </div>
     <div class="flex-grow text-lg font-top">
       <%= study_time.user.name %>
-      <p>開始時間 <%= l study_time.created_at, format: :long %></p>
+      <p><%= t(StudyTime.human_attribute_name(:created_at)) %> <%= l study_time.created_at, format: :long %></p>
       <% if study_time.status == 0 %>
-        <p>更新時間 <%= l study_time.updated_at, format: :long %></p>
+        <p><%= t(StudyTime.human_attribute_name(:updated_at)) %> <%= l study_time.updated_at, format: :long %></p>
       <% else %>
-        <p>終了時間 <%= l study_time.updated_at, format: :long %></p>
+        <p><%= t('study_times.end_time') %> <%= l study_time.updated_at, format: :long %></p>
       <% end %>
-      <p>合計時間 <%= "#{study_time.total_time / 60}時間#{study_time.total_time % 60}分" %></p>
+      <p><%= t(StudyTime.human_attribute_name(:total_time)) %> <%= "#{study_time.total_time / 60}時間#{study_time.total_time % 60}分" %></p>
       <div class="flex items-center flex-wrap justify-end">
         <% if (current_user == study_time.user && study_time.status == 0) || (current_user.role == 1 && study_time.status == 0) %>
-          <%= link_to '共有', "https://twitter.com/share?url=https://studying-tracker.fly.dev/&text=#{CGI.escape("#{study_time.user.name}さんの現在の学習時間は#{study_time.total_time / 60}時間#{study_time.total_time % 60}分です！")}", class: 'btn btn-info fa-brands fa-twitter fa-2xl text-twitter', target: '_blank' %>
+          <%= link_to t('study_times.tweet'), "https://twitter.com/share?url=https://studying-tracker.fly.dev/&text=#{study_time.user.name}さんの現在の学習時間は#{study_time.total_time / 60}時間#{study_time.total_time % 60}分です！%0A&hashtags=StudyingTracker", class: 'btn btn-info fa-brands fa-twitter fa-2xl text-twitter', target: '_blank' %>
           <%= form_with(model: study_time, url: study_time_path(study_time)) do |f| %>
-            <%= f.submit "更新", class: "btn btn-primary text-headfoot" %>
+            <%= f.submit t('study_times.update'), class: "btn btn-primary text-headfoot" %>
           <% end %>
           <%= form_with(model: study_time, url: finish_study_time_path(study_time)) do |f| %>
-            <%= f.submit "終了", class: "btn btn-secondary text-headfoot" %>
+            <%= f.submit t('study_times.end'), class: "btn btn-secondary text-headfoot" %>
           <% end %>
         <% end %>
         <% if current_user == study_time.user && study_time.status == 1 %>
-          <%= link_to '共有', "https://twitter.com/share?url=https://studying-tracker.fly.dev/&text=#{CGI.escape("#{study_time.user.name}さんの今回の学習時間は#{study_time.total_time / 60}時間#{study_time.total_time % 60}分でした！")}", class: 'btn btn-info fa-brands fa-twitter fa-2xl text-twitter', target: '_blank' %>
+          <%= link_to t('study_times.tweet'), "https://twitter.com/share?url=https://studying-tracker.fly.dev/&text=#{study_time.user.name}さんの今回の学習時間は#{study_time.total_time / 60}時間#{study_time.total_time % 60}分でした！%0A&hashtags=StudyingTracker", class: 'btn btn-info fa-brands fa-twitter fa-2xl text-twitter', target: '_blank' %>
           <%= button_to t('study_times.destroy'), study_time_path(study_time), class: "btn btn-secondary", method: :delete, "data-confirm" => t('defaults.message.destroy_confirm') %>
         <% end %>
         </div>

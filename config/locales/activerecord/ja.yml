@@ -2,7 +2,7 @@ ja:
   activerecord:
     models:
       user: "ユーザー"
-      board: "掲示板"
+      study_time: "学習記録"
     attributes:
       user:
         email: "メールアドレス"
@@ -10,7 +10,8 @@ ja:
         password_confirmation: "パスワード確認"
         name: "ニックネーム"
         avatar: 'アバター'
-      board:
-        title: "タイトル"
-        body: "本文"
-        board_image: "サムネイル"
+      study_time:
+        created_at: "開始時間"
+        updated_at: "更新時間"
+        ended_at: "更新時間"
+        total_time: "合計時間"
