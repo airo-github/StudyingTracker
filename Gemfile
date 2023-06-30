@@ -89,3 +89,5 @@ gem 'dotenv-rails'
 gem 'fog-aws'
 gem 'carrierwave-aws'
 gem 'aws-sdk-s3', require: false
+gem 'kaminari'
+gem 'bootstrap4-kaminari-views'
