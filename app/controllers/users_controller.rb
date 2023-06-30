@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to login_path, success: t('.success')
+      auto_login(@user)
+      redirect_to study_times_path, success: t('.success')
     else
       flash.now[:danger] = t('.fail')
       render :new
@@ -19,7 +20,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     flash[:notice] = 'ユーザーを削除しました。'
-    redirect_to :root #削除に成功すればrootページに戻る
+    redirect_to :root
   end
 
   private

@@ -3,7 +3,7 @@
     <div class="font-title">
       <%= link_to "Studying Tracker", root_path, class: "text-5xl text-headfoot" %>
     </div>
-    <div class="font-top md:ml-auto flex flex-wrap items-center text-base md:text-xl justify-center">
+    <div class="md:ml-auto flex flex-wrap items-center text-base md:text-xl justify-center">
       <% unless current_user.study_times.exists?(status: 0) %>
         <%= link_to (t 'study_times.new.title'), new_study_time_path, class: "btn mr-5 text-headfoot"%>
       <% end %>
