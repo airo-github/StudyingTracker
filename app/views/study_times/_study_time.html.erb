@@ -5,7 +5,7 @@
         <%= image_tag study_time.user.avatar.url %>
       </div>
     </div>
-    <div class="flex-grow text-lg font-top">
+    <div class="flex-grow text-lg">
       <%= study_time.user.name %>
       <p><%= t(StudyTime.human_attribute_name(:created_at)) %> <%= l study_time.created_at, format: :long %></p>
       <% if study_time.status == 0 %>
