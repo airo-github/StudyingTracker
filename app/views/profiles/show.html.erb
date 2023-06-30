@@ -40,6 +40,7 @@
       <% end %>
     </div>
     <%= button_to t('users.destroy'), user_path(current_user.id), class: 'btn btn-secondary float-right text-headfoot', method: :delete, "data-confirm" => t('defaults.message.destroy_confirm') %>
+    <%= paginate @study_time %>
     <br>
     <br>
   </div>
