@@ -1,9 +1,10 @@
 <div class="container px-5 py-20 mx-auto">
-  <div class="flex flex-col text-center w-full mb-20">
+  <div class="flex flex-col text-center w-full mb-5">
     <% if @study_time.present? %>
       <div class="text-3xl font-top mb-4"><%= t('.title') %></div>
-        <% if current_user.study_times.exists?(status: 0) %>
+        <% if current_user && current_user.study_times.exists?(status: 0) %>
           <%= link_to t('.start'), "https://twitter.com/share?url=https://studying-tracker.fly.dev/&text=#{current_user.name}さんが学習を開始しました！%0A&hashtags=StudyingTracker", class: 'btn btn-info fa-brands fa-twitter fa-2xl text-twitter w-48', target: '_blank' %>
+        <% else %>
         <% end %>
       </div><br>
       <div class="flex flex-wrap -m-2">

@@ -1,4 +1,5 @@
 class StudyTimesController < ApplicationController
+  skip_before_action :require_login, only: %i[index]
 
   def new
     if current_user.study_times.exists?(status: 0)
