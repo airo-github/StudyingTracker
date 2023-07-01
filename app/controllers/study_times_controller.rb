@@ -56,7 +56,7 @@ class StudyTimesController < ApplicationController
     @study_time.updated_at = updated_at
     @study_time.total_time = ((updated_at - created_at) / 60).to_i
     if @study_time.save(validate: false)
-      redirect_to profile_path, notice: 'Study time was successfully updated.'
+      redirect_to profile_path, notice: t("defaults.message.updated")
     else
       render :edit_timestamps
     end
