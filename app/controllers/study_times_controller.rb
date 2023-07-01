@@ -47,7 +47,7 @@ class StudyTimesController < ApplicationController
   def edit_timestamps
     @study_time = StudyTime.find(params[:id])
     if @study_time.updated_at >= Time.now
-      redirect_to study_times_path, alert: 'You can only edit study times that were updated in the past.'
+      redirect_to profile_path, alert: t('defaults.message.only_edit_study_times_that_were_updated_in_the_past')
     end
   end
 
@@ -59,7 +59,7 @@ class StudyTimesController < ApplicationController
     @study_time.updated_at = updated_at
     @study_time.total_time = ((updated_at - created_at) / 60).to_i
     if @study_time.save(validate: false)
-      redirect_to profile_path, notice: 'Study time was successfully updated.'
+      redirect_to profile_path, notice: t("defaults.message.updated")
     else
       render :edit_timestamps
     end

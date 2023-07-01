@@ -14,6 +14,7 @@ ja:
       not_updated: "更新できませんでした"
       destroy_confirm: '本当に退会しますか？'
       already_have_study_time: "もうすでに学習を開始しています"
+      only_edit_study_times_that_were_updated_in_the_past: "既に終了した学習記録のみを編集できます"
   users:
     new:
       title: "ユーザー登録"
@@ -46,6 +47,12 @@ ja:
     tweet: "共有"
     update: "更新"
     end: "終了"
+    edit:
+      title: "学習記録の編集"
+      edit_study_times: "編集"
+      back: "戻る"
+    edit_timestamps:
+      title: "学習記録の編集"
   profiles:
     show:
       title: "プロフィール"
