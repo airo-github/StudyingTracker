@@ -26,6 +26,7 @@
         <% end %>
         <% if current_user == study_time.user && study_time.status == 1 %>
           <%= link_to t('study_times.tweet'), "https://twitter.com/share?url=https://studying-tracker.fly.dev/&text=#{study_time.user.name}さんの今回の学習時間は#{study_time.total_time / 60}時間#{study_time.total_time % 60}分でした！%0A&hashtags=StudyingTracker", class: 'btn btn-info fa-brands fa-twitter fa-2xl text-twitter', target: '_blank' %>
+          <%= link_to  t('study_times.edit.edit_study_times'), edit_timestamps_study_time_path(study_time), class: "btn btn-primary" %>
           <%= button_to t('study_times.destroy'), study_time_path(study_time), class: "btn btn-secondary", method: :delete, "data-confirm" => t('defaults.message.destroy_confirm') %>
         <% end %>
         </div>

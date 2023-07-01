@@ -1,0 +1,22 @@
+<div class="flex justify-center text-center">
+  <div class="">
+    <div class="">
+      <h1 class="text-3xl my-5"><%= t('.title') %></h1>
+    </div>
+    <%= form_with(model: @study_time, url: change_timestamps_study_time_path(@study_time), local: true) do |f| %>
+      <%== render 'shared/error_messages', object: f.object %>
+      <div class="mb-3 field">
+        <%= f.label :created_at, class: 'text-2xl' %>
+        <%= f.datetime_select :created_at, class: 'w-full m-3 p-3' %>
+      </div>
+      <div class="mb-3 field">
+        <%= f.label :updated_at, class: 'text-2xl' %>
+        <%= f.datetime_select :updated_at, class: 'w-full m-3 p-3' %>
+      </div>
+      <div class="d-grid">
+        <%= f.submit class: 'btn btn-primary text-headfoot' %>
+        <%= link_to t('study_times.edit.back'), study_times_path, class: 'btn btn-primary text-headfoot' %>
+      </div>
+    <% end %>
+  </div>
+</div>
