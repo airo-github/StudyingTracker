@@ -46,9 +46,6 @@ class StudyTimesController < ApplicationController
 
   def edit_timestamps
     @study_time = StudyTime.find(params[:id])
-    if @study_time.updated_at >= Time.now
-      redirect_to study_times_path, alert: 'You can only edit study times that were updated in the past.'
-    end
   end
 
   def change_timestamps
