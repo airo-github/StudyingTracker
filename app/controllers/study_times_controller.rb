@@ -44,6 +44,27 @@ class StudyTimesController < ApplicationController
     redirect_to profile_path
   end
 
+  def edit_timestamps
+    @study_time = StudyTime.find(params[:id])
+    if @study_time.updated_at >= Time.now
+      redirect_to study_times_path, alert: 'You can only edit study times that were updated in the past.'
+    end
+  end
+
+  def change_timestamps
+    @study_time = StudyTime.find(params[:id])
+    created_at = Time.zone.local(*params[:study_time].values_at('created_at(1i)', 'created_at(2i)', 'created_at(3i)', 'created_at(4i)', 'created_at(5i)'))
+    updated_at = Time.zone.local(*params[:study_time].values_at('updated_at(1i)', 'updated_at(2i)', 'updated_at(3i)', 'updated_at(4i)', 'updated_at(5i)'))
+    @study_time.created_at = created_at
+    @study_time.updated_at = updated_at
+    @study_time.total_time = ((updated_at - created_at) / 60).to_i
+    if @study_time.save(validate: false)
+      redirect_to profile_path, notice: 'Study time was successfully updated.'
+    else
+      render :edit_timestamps
+    end
+  end
+
   private
 
   def study_time_params
