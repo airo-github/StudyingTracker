@@ -28,6 +28,8 @@
         <th class= "text-xl",scope="row"><%= t('.total_time') %>  <%="#{@total_time / 60}"%><%=t('.hour')%><%="#{@total_time % 60}"%><%=t('.minute') %></th>
       </tr>
     </table>
+    <br>
+    <br>
     <div class="flex flex-col text-center w-full mb-20">
       <% if @study_time.present? %>
         <div class="text-3xl mb-4"><%= t('.study_times') %></div>
