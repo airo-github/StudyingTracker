@@ -3,6 +3,7 @@ ja:
     login: "ログイン"
     loginpage: "ログインページへ"
     register: "登録"
+    register_page: "登録ページへ"
     logout: "ログアウト"
     edit: '編集'
     destroy: '削除'

@@ -23,11 +23,14 @@
       </div>
       <div class="mb-3">
         <%= f.label :avatar %>
-        <%= f.file_field :avatar, onchange: 'previewFileWithId(preview)', class: 'form-control mb-3', accept: 'image/*' %>
+        <%= f.file_field :avatar, onchange: 'previewFileWithId(preview)', class: 'form-control w-full m-3 p-3', accept: 'image/*' %>
         <%= f.hidden_field :avatar_cache %>
       </div>
-      <div class="d-grid">
-        <%= f.submit t('defaults.register'), class: 'btn btn-primary' %>
+      <div class="d-grid mb-10">
+        <%= f.submit t('defaults.register'), class: 'btn btn-primary text-headfoot' %>
+      </div>
+      <div class='text-center'>
+        <%= link_to (t 'defaults.loginpage'), login_path, class: "btn btn-primary text-headfoot"%>
       </div>
     <% end %>
   </div>
