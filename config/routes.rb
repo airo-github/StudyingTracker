@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :study_times, only: %i[new create index update destroy] do
     member do
       patch :finish
+      get :edit_timestamps
+      patch :change_timestamps
     end
   end
 end
