@@ -1,7 +1,5 @@
-<div class="h-[65vh] flex flex-col justify-between">
-  <div class="h-96" style="display: flex; justify-content: center; align-items: center;">
-    <%= form_with model: @study_time, url: study_times_path, local: true do |f| %>
-      <%= f.submit t('.start'), class: 'btn btn-wide btn-lg btn-accent text-headfoot' %>
-    <% end %>
-  </div>
+<div class="h-96" style="display: flex; justify-content: center; align-items: center;">
+  <%= form_with model: @study_time, url: study_times_path, local: true do |f| %>
+    <%= f.submit t('.start'), class: 'btn btn-wide btn-lg btn-accent text-headfoot' %>
+  <% end %>
 </div>
