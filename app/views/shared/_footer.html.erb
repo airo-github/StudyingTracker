@@ -1,12 +1,18 @@
-<footer data-theme="retro", class="p-20 text-xl">
-  <div class="flex-wrap justify-center text-headfoot">
-    <p>Developed by team satoharu</p>
-    <p>44期:おおくまりょうや 44期:おのたつや 44期:さとうはるか 44期:やましたたかひろ</p>
-    <br>
-    <p>Special Thanks.</p>
-    <p>34期:れなっちさん 36期:ふじいさん 39期:yutaさん 40期:ミツさん</p>
-    <br>
-    <%= link_to (t 'policy.privacy_policy'), privacy_path, class: "btn mr-5 text-headfoot"%>
-    <%= link_to (t 'policy.terms_of_service'), service_path, class: "btn mr-5 text-headfoot"%>
-  </div>
-</footer>
+<div class="footer-wrapper flex flex-col">
+  <footer data-theme="retro", class="py-7 text-1xl">
+
+    <div class="container mx-auto flex flex-wrap flex-col md:flex-row items-center text-headfoot">
+      <div class="message">
+        <p>Developed by team satoharu</p>
+        <p>44期:おおくまりょうや 44期:おのたつや 44期:さとうはるか 44期:やましたたかひろ</p>
+        <p>Special Thanks.</p>
+        <p>34期:れなっちさん 36期:ふじいさん 39期:yutaさん 40期:ミツさん</p>
+      </div>
+      <div class="md:ml-auto flex flex-wrap items-center text-base md:text-xl justify-center">
+        <%= link_to (t 'policy.privacy_policy'), privacy_path, class: "btn mr-5 text-headfoot"%>
+        <%= link_to (t 'policy.terms_of_service'), service_path, class: "btn mr-5 text-headfoot"%>
+      </div>
+    </div>
+
+  </footer>
+</div>

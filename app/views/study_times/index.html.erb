@@ -16,8 +16,10 @@
         <%= render other_study_time %>
       </div>
     <% else %>
-      <div class="flex flex-col text-center w-full mb-20">
-        <div class="text-3xl mb-4"><%= t('.no_result') %></div>
+      <div class="h-[50vh] flex flex-col justify-between" style="display: flex; justify-content: center; align-items: center;">
+        <div class="flex flex-col text-center w-full mb-20">
+          <div class="text-3xl mb-4"><%= t('.no_result') %></div>
+        </div>
       </div>
     <% end %>
   </div>
