@@ -251,7 +251,7 @@ GEM
       version_gem (~> 1.1)
     pg (1.5.3)
     public_suffix (5.0.1)
-    puma (5.6.5)
+    puma (5.6.7)
       nio4r (~> 2.0)
     racc (1.7.0)
     rack (2.2.7)
@@ -379,7 +379,7 @@ DEPENDENCIES
   jsbundling-rails
   kaminari
   pg (~> 1.5)
-  puma (~> 5.0)
+  puma (~> 5.6)
   rails (~> 7.0.4, >= 7.0.4.3)
   rails-i18n
   redis (~> 5.0)
